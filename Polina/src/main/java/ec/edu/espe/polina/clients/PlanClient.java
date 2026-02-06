@@ -1,0 +1,13 @@
+package ec.edu.espe.polizams.clients;
+
+import ec.edu.espe.polizams.models.dto.PlanDTO;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import java.util.Optional;
+
+@FeignClient(name = "plan-ms", url = "${ms.planes.url}/api/planes")
+public interface PlanClient {
+    @GetMapping("/{id}")
+    Optional<PlanDTO> findById(@PathVariable Long id);
+}
