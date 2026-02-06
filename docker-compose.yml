@@ -1,13 +1,13 @@
 version: '3.9'
 
 services:
-
-  mysql-sisdb2025:
+  # Base de Datos MySQL (Para Pólizas)
+  mysql-polizas:
     image: mysql:8.0
-    container_name: mysql-sisdb2025
+    container_name: mysql-polizas
     restart: always
     environment:
-      MYSQL_DATABASE: sisdb2025
+      MYSQL_DATABASE: polizas_db
       MYSQL_ROOT_PASSWORD: abcd
       MYSQL_USER: AppRoot
       MYSQL_PASSWORD: abcd
@@ -16,34 +16,73 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
-  autores:
-    build: ./autor-ms
-    container_name: autores
-    ports:
-      - "8002:8002"
+  # Base de Datos PostgreSQL (Para Clientes y Planes)
+  postgres-independientes:
+    image: postgres:15
+    container_name: postgres-independientes
+    restart: always
     environment:
-      DB_HOST: mysql-sisdb2025
-      DB_PORT: 3306
-      DB_NAME: sisdb2025
-      DB_USER: AppRoot
+      POSTGRES_DB: clientes_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: abcd
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Microservicio Clientes (Carpeta: autor-ms)
+  clientes:
+    build: ./autor-ms
+    container_name: clientes-ms
+    ports:
+      - "8080:8080"
+    environment:
+      SERVER_PORT: 8080
+      DB_HOST: postgres-independientes
+      DB_PORT: 5432
+      DB_NAME: clientes_db
+      DB_USER: postgres
       DB_PWD: abcd
     depends_on:
-      - mysql-sisdb2025
+      - postgres-independientes
 
-  libros:
-    build: ./test
-    container_name: libros
+  # Microservicio Planes (Carpeta: test) - ¡OJO AQUÍ!
+  planes:
+    build: ./test  # Usamos la carpeta 'test' para el servicio de Planes
+    container_name: planes-ms
+    ports:
+      - "8081:8081"
+    environment:
+      SERVER_PORT: 8081
+      DB_HOST: postgres-independientes
+      DB_PORT: 5432
+      DB_NAME: planes_db # Nota: Postgres permite varias DBs o esquemas, aquí usará la default o crea una init
+      DB_USER: postgres
+      DB_PWD: abcd
+    depends_on:
+      - postgres-independientes
+
+  # Microservicio Pólizas (Carpeta: Polina) - ¡OJO AQUÍ!
+  polizas:
+    build: ./Polina # Usamos la carpeta 'Polina' para el servicio de Pólizas
+    container_name: polizas-ms
     ports:
       - "8001:8001"
     environment:
-      DB_HOST: mysql-sisdb2025
+      SERVER_PORT: 8001
+      DB_HOST: mysql-polizas
       DB_PORT: 3306
-      DB_NAME: sisdb2025
+      DB_NAME: polizas_db
       DB_USER: AppRoot
       DB_PWD: abcd
+      # Conexión con los otros servicios (nombres de servicio definidos arriba)
+      CLIENTES_URL: http://clientes:8080
+      PLANES_URL: http://planes:8081
     depends_on:
-      - mysql-sisdb2025
-      - autores
+      - mysql-polizas
+      - clientes
+      - planes
 
 volumes:
   mysql_data:
+  postgres_data:
