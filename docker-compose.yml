@@ -20,7 +20,7 @@ services:
     build: ./autor-ms
     container_name: autores
     ports:
-      - "8080:8080"
+      - "8002:8002"
     environment:
       DB_HOST: mysql-sisdb2025
       DB_PORT: 3306
