@@ -1,6 +1,6 @@
-package com.espe.test.test.controllers;
+package com.espe.test.test.controllers; // <--- CORRECCIÓN (com.espe...)
 
-import com.espe.test.test.models.entities.PlanSeguro;
+import com.espe.test.test.models.entities.PlanSeguro; // <--- CORRECCIÓN DE IMPORT
 import com.espe.test.test.services.PlanSeguroService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
