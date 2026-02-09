@@ -1,4 +1,4 @@
-package ec.edu.espe.planms.config;
+package ec.edu.espe.test.test.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
