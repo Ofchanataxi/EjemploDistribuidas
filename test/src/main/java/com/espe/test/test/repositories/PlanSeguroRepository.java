@@ -1,6 +1,6 @@
-package com.espe.test.test.repositories; // <--- Verifica este paquete
+package com.espe.test.test.repositories;
 
-import com.espe.test.test.models.entities.PlanSeguro; // <--- Verifica este import
+import com.espe.test.test.models.entities.PlanSeguro;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PlanSeguroRepository extends JpaRepository<PlanSeguro, Integer> {
