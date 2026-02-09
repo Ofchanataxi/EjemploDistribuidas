@@ -10,4 +10,8 @@ FROM eclipse-temurin:17-jdk-alpine
 VOLUME /tmp
 # Copiamos el jar generado en la etapa anterior
 COPY --from=build /app/target/*.jar app.jar
+
+# Exponer puerto donde la app escucha (configurable por SERVER_PORT)
+EXPOSE 8001
+
 ENTRYPOINT ["java","-jar","/app.jar"]

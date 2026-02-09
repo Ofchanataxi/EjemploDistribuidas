@@ -1,0 +1,176 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clientes-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clientes-ms
+  template:
+    metadata:
+      labels:
+        app: clientes-ms
+    spec:
+      containers:
+        - name: clientes-ms
+          image: autor-ms:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SERVER_PORT
+              value: "8080"
+            - name: DB_HOST
+              value: "postgres-independientes"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: "clientes_db"
+            - name: DB_USER
+              value: "postgres"
+            - name: DB_PWD
+              value: "abcd"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clientes-ms
+spec:
+  selector:
+    app: clientes-ms
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: planes-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: planes-ms
+  template:
+    metadata:
+      labels:
+        app: planes-ms
+    spec:
+      containers:
+        - name: planes-ms
+          image: planes-ms:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SERVER_PORT
+              value: "8081"
+            - name: DB_HOST
+              value: "postgres-independientes"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: "planes_db"
+            - name: DB_USER
+              value: "postgres"
+            - name: DB_PWD
+              value: "abcd"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: planes-ms
+spec:
+  selector:
+    app: planes-ms
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: polizas-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: polizas-ms
+  template:
+    metadata:
+      labels:
+        app: polizas-ms
+    spec:
+      containers:
+        - name: polizas-ms
+          image: polizas-ms:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8001
+          env:
+            - name: SERVER_PORT
+              value: "8001"
+            - name: DB_HOST
+              value: "mysql-polizas"
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_NAME
+              value: "polizas_db"
+            - name: DB_USER
+              value: "AppRoot"
+            - name: DB_PWD
+              value: "abcd"
+            - name: CLIENTES_URL
+              value: "http://clientes-ms:8080"
+            - name: PLANES_URL
+              value: "http://planes-ms:8081"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: polizas-ms
+spec:
+  selector:
+    app: polizas-ms
+  ports:
+    - protocol: TCP
+      port: 8001
+      targetPort: 8001
+---
+# Frontend deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-app
+  template:
+    metadata:
+      labels:
+        app: frontend-app
+    spec:
+      containers:
+        - name: frontend
+          image: frontend-seguros:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-app
+spec:
+  selector:
+    app: frontend-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer

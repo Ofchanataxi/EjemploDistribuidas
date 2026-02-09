@@ -1,0 +1,89 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-polizas
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: mysql-polizas
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-polizas
+spec:
+  selector:
+    matchLabels:
+      app: mysql-polizas
+  template:
+    metadata:
+      labels:
+        app: mysql-polizas
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          env:
+            - name: MYSQL_DATABASE
+              value: "polizas_db"
+            - name: MYSQL_ROOT_PASSWORD
+              value: "abcd"
+            - name: MYSQL_USER
+              value: "AppRoot"
+            - name: MYSQL_PASSWORD
+              value: "abcd"
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+---
+# Postgres
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-independientes
+spec:
+  ports:
+    - port: 5432
+  selector:
+    app: postgres-independientes
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-independientes
+spec:
+  selector:
+    matchLabels:
+      app: postgres-independientes
+  template:
+    metadata:
+      labels:
+        app: postgres-independientes
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          env:
+            - name: POSTGRES_DB
+              value: "clientes_db"
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "abcd"
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+

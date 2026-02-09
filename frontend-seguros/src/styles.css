@@ -1,1 +1,2 @@
-@import "~bootstrap/dist/css/bootstrap.min.css";
+/* Opción 1: Import directo (recomendado para Angular moderno) */
+@import "bootstrap/dist/css/bootstrap.min.css";

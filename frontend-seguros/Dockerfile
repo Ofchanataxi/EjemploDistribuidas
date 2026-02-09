@@ -10,5 +10,7 @@ RUN npm run build --configuration=production
 FROM nginx:alpine
 # Copiamos el build de Angular a la carpeta de Nginx
 COPY --from=build /app/dist/frontend-seguros/browser /usr/share/nginx/html
+# Copiamos la configuración personalizada de Nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
