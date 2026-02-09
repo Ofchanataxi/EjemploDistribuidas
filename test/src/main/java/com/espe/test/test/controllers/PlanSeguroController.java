@@ -1,7 +1,7 @@
-package ec.edu.espe.test.test.controllers;
+package com.espe.test.test.controllers;
 
-import ec.edu.espe.test.test.models.entities.PlanSeguro;
-import ec.edu.espe.test.test.services.PlanSeguroService;
+import com.espe.test.test.models.entities.PlanSeguro;
+import com.espe.test.test.services.PlanSeguroService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

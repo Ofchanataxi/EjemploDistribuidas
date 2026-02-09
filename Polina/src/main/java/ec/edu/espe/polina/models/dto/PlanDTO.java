@@ -1,4 +1,4 @@
-package ec.edu.espe.poliza.models.dto;
+package ec.edu.espe.polina.models.dto;
 
 import java.math.BigDecimal;
 

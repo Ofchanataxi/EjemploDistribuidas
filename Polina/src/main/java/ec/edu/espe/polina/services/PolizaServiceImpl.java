@@ -1,7 +1,7 @@
-package ec.edu.espe.poliza.services;
+package ec.edu.espe.polina.services;
 
-import ec.edu.espe.poliza.models.entities.Poliza;
-import ec.edu.espe.poliza.repositories.PolizaRepository;
+import ec.edu.espe.polina.models.entities.Poliza;
+import ec.edu.espe.polina.repositories.PolizaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

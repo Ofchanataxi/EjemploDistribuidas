@@ -1,7 +1,7 @@
-package ec.edu.espe.test.test.services;
+package com.espe.test.test.services;
 
-import ec.edu.espe.test.test.models.entities.PlanSeguro;
-import ec.edu.espe.test.test.repositories.PlanSeguroRepository;
+import com.espe.test.test.models.entities.PlanSeguro;
+import com.espe.test.test.repositories.PlanSeguroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

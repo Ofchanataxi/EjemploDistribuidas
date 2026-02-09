@@ -1,4 +1,4 @@
-package ec.edu.espe.test.test.repositories;
+package com.espe.test.test.repositories;
 
 import ec.edu.espe.test.test.models.entities.PlanSeguro;
 import org.springframework.data.repository.CrudRepository;

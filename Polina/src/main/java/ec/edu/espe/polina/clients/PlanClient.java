@@ -1,6 +1,6 @@
-package ec.edu.espe.poliza.clients;
+package ec.edu.espe.polina.clients;
 
-import ec.edu.espe.poliza.models.dto.PlanDTO;
+import ec.edu.espe.polina.models.dto.PlanDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

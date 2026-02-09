@@ -1,6 +1,6 @@
-package ec.edu.espe.test.test.services;
+package com.espe.test.test.services;
 
-import ec.edu.espe.test.test.models.entities.PlanSeguro;
+import com.espe.test.test.models.entities.PlanSeguro;
 import java.util.List;
 import java.util.Optional;
 
