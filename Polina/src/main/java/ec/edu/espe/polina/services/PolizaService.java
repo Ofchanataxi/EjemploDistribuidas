@@ -1,6 +1,6 @@
-package ec.edu.espe.polizams.services;
+package ec.edu.espe.poliza.services;
 
-import ec.edu.espe.polizams.models.entities.Poliza;
+import ec.edu.espe.poliza.models.entities.Poliza;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,11 +1,11 @@
-package ec.edu.espe.polizams.controllers;
+package ec.edu.espe.polina.controllers;
 
-import ec.edu.espe.polizams.clients.ClienteClient;
-import ec.edu.espe.polizams.clients.PlanClient;
-import ec.edu.espe.polizams.models.dto.ClienteDTO;
-import ec.edu.espe.polizams.models.dto.PlanDTO;
-import ec.edu.espe.polizams.models.entities.Poliza;
-import ec.edu.espe.polizams.services.PolizaService;
+import ec.edu.espe.poliza.clients.ClienteClient;
+import ec.edu.espe.poliza.clients.PlanClient;
+import ec.edu.espe.poliza.models.dto.ClienteDTO;
+import ec.edu.espe.poliza.models.dto.PlanDTO;
+import ec.edu.espe.poliza.models.entities.Poliza;
+import ec.edu.espe.poliza.services.PolizaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

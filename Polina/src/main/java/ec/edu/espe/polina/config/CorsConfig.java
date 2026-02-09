@@ -1,4 +1,4 @@
-package ec.edu.espe.polizams.config;
+package ec.edu.espe.polina.config; // <--- CAMBIAR ESTO (antes decía polizams)
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

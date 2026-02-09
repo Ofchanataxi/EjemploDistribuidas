@@ -1,4 +1,4 @@
-package ec.edu.espe.polizams.models.entities;
+package ec.edu.espe.poliza.models.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
